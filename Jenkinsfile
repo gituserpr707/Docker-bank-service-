@@ -46,7 +46,7 @@ pipeline {
                     echo "Docker Image Tag Name: ${env.BUILD_NUMBER}"
                     // sh "docker stop bank-api || true && docker rm bank-api || true"
                     // sh "docker run --name bank-api -d -p 8081:8081 bank-api:${env.BUILD_NUMBER}"
-                    sh "docker run --name bank-api -d -p 8081:8081 bank-api:${env.BUILD_NUMBER}"
+                    bat "docker run --name bank-api -d -p 8081:8081 bank-api:${env.BUILD_NUMBER}"
 
                 }
             }
