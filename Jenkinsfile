@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 script {
-                    def WORKSPACE = "/Spring_boot_project/spring-mysql/spring-mysql"
+                    def WORKSPACE = "/var/lib/jenkins/workspace/spring-mysql"
                     def dockerImageTag = "spring-mysql${env.BUILD_NUMBER}"
 
                     try {
