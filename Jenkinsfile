@@ -39,35 +39,35 @@ pipeline {
         }
         
 
-        // stage('Deploy docker') {
-        //     steps {
-        //         script {
-        //             echo "Docker Image Tag Name: ${dockerImageTag}"
-        //             echo "Docker Image Tag Name: ${env.BUILD_NUMBER}"
-        //             sh "docker stop bank-api || true && docker rm bank-api || true"
-        //             sh "docker run --name bank-api -d -p 8081:8081 bank-api:${env.BUILD_NUMBER}"
-        //             sh "docker run --name bank-api -d -p 8081:8081 bank-api:${env.BUILD_NUMBER}"
-
-        //         }
-        //     }
-        // }
-  
-       stage('Deploy docker') {
+        stage('Deploy docker') {
             steps {
                 script {
-                    def dockerImageTag = "bank-api:${env.BUILD_NUMBER}"
                     echo "Docker Image Tag Name: ${dockerImageTag}"
+                    echo "Docker Image Tag Name: ${env.BUILD_NUMBER}"
+                    // sh "docker stop bank-api || true && docker rm bank-api || true"
+                    // sh "docker run --name bank-api -d -p 8081:8081 bank-api:${env.BUILD_NUMBER}"
+                    sh "docker run --name bank-api -d -p 8081:8081 bank-api:${env.BUILD_NUMBER}"
 
-                    // Remove existing container
-                    docker.image('bank-api').removeContainer()
-
-                    // Run new container
-                    docker.image('bank-api:${env.BUILD_NUMBER}')
-                          .withRun('-p 8081:8081') { c ->
-                              echo "Container ID: ${c.id}"
-                          }
                 }
             }
-     }
+        }
+  
+     //   stage('Deploy docker') {
+     //        steps {
+     //            script {
+     //                def dockerImageTag = "bank-api:${env.BUILD_NUMBER}"
+     //                echo "Docker Image Tag Name: ${dockerImageTag}"
+
+     //                // Remove existing container
+     //                docker.image('bank-api').removeContainer()
+
+     //                // Run new container
+     //                docker.image('bank-api:${env.BUILD_NUMBER}')
+     //                      .withRun('-p 8081:8081') { c ->
+     //                          echo "Container ID: ${c.id}"
+     //                      }
+     //            }
+     //        }
+     // }
   }
 }
