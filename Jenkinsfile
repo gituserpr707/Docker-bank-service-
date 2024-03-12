@@ -9,7 +9,7 @@ pipeline {
                     def dockerImageTag = "bank-api${env.BUILD_NUMBER}"
 
                     try {
-                        git url: 'https://github.com/gituserpr707/Docker-bank-service-.git',
+                        git url: 'https://github.com/gituserpr707/bank-api.git',
                             credentialsId: 'gituserpr707',
                             branch: 'main'
                     } catch (Exception e) {
