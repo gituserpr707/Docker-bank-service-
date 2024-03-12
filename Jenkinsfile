@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     def WORKSPACE = "/var/lib/jenkins/workspace/bank-api"
-                    def dockerImageTag = "spring-mysql${env.BUILD_NUMBER}"
+                    def dockerImageTag = "bank-api${env.BUILD_NUMBER}"
 
                     try {
                         git url: 'https://github.com/gituserpr707/Docker-bank-service-.git',
@@ -22,7 +22,7 @@ pipeline {
         stage('Build docker') {
             steps {
                 script {
-                    dockerImage = docker.build("spring-mysql:${env.BUILD_NUMBER}")
+                    dockerImage = docker.build("bank-api:${env.BUILD_NUMBER}")
                 }
             }
         }
@@ -31,8 +31,8 @@ pipeline {
             steps {
                 script {
                     echo "Docker Image Tag Name: ${dockerImageTag}"
-                    bat "docker stop spring-mysql || true && docker rm spring-mysql || true"
-                    bat "docker run --name spring-mysql -d -p 8081:8081 spring-mysql:${env.BUILD_NUMBER}"
+                    sh "docker stop bank-api || true && docker rm bank-api || true"
+                    sh "docker run --name bank-api -d -p 8081:8081 bank-api:${env.BUILD_NUMBER}"
                 }
             }
         }
