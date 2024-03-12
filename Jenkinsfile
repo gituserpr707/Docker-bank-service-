@@ -2,7 +2,7 @@ pipeline {
     agent any // This will run the pipeline on any available agent
 
     environment {
-        WORKSPACE = "/Spring_boot_project/bank-service"
+        WORKSPACE = "/var/lib/jenkins/workspace/bank-api"
         dockerImageTag = "bank-api${env.BUILD_NUMBER}"
     }
 
