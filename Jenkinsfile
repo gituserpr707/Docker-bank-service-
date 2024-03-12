@@ -52,15 +52,14 @@ pipeline {
         //     }
         // }
   
-        stage('Deploy docker') {
+       stage('Deploy docker') {
             steps {
                 script {
                     def dockerImageTag = "bank-api:${env.BUILD_NUMBER}"
                     echo "Docker Image Tag Name: ${dockerImageTag}"
 
-                    // Stop and remove existing container
-                    docker.image('bank-api').stop()
-                    docker.image('bank-api').remove()
+                    // Remove existing container
+                    docker.image('bank-api').removeContainer()
 
                     // Run new container
                     docker.image('bank-api:${env.BUILD_NUMBER}')
@@ -69,6 +68,6 @@ pipeline {
                           }
                 }
             }
-        }  
-    }
+     }
+  }
 }
