@@ -24,7 +24,7 @@ pipeline {
         stage('Maven Build') {
             steps {
                 // Use 'withMaven' to invoke Maven with the correct settings
-                withMaven(maven: 'Maven 3.8.8') {
+                withMaven(maven: 'mvn') {
                     sh 'mvn clean install -DskipTests'
                 }
             }
