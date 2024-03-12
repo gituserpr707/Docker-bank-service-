@@ -21,6 +21,10 @@ pipeline {
             }
         }
 
+        tools{
+        maven '3.8.8'
+        }
+
         stage('Maven Build') {
             steps {
                 // Run Maven build
