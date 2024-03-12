@@ -1,13 +1,15 @@
 pipeline {
     agent any // This will run the pipeline on any available agent
 
+    environment {
+        WORKSPACE = "/var/lib/jenkins/workspace/bank-api"
+        dockerImageTag = "bank-api${env.BUILD_NUMBER}"
+    }
+
     stages {
         stage('Clone Repo') {
             steps {
                 script {
-                    def WORKSPACE = "/var/lib/jenkins/workspace/bank-api"
-                    def dockerImageTag = "bank-api${env.BUILD_NUMBER}"
-
                     try {
                         git url: 'https://github.com/gituserpr707/bank-api.git',
                             credentialsId: 'gituserpr707',
@@ -19,7 +21,7 @@ pipeline {
             }
         }
 
-         stage('Maven Build') {
+        stage('Maven Build') {
             steps {
                 // Run Maven build
                 sh 'mvn clean install -DskipTests'
