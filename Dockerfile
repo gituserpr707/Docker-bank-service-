@@ -21,14 +21,13 @@ RUN mvn clean install -DskipTests
 # Docker Build Stage
 FROM openjdk:11
 
-# Set the working directory
-WORKDIR /opt/app
-
 # Copy the JAR file from the build stage to the current directory
-COPY --from=build /opt/app/target/mysql_spring.jar ./mysql_spring.jar
+COPY --from=build /opt/app/target/*.jar bank-api.jar
 
 # Expose the default port
 EXPOSE 8081
 
+EXPOSE $PORT
+
 # Set the entry point for the container
-ENTRYPOINT ["java", "-jar", "mysql_spring.jar"]
+ENTRYPOINT ["java", "-jar", "-Dserver.port=${PORT}","bank-api.jar"]
